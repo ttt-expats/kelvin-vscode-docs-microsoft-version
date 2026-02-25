@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - aggk4gggs80wos0gw4g4ckkc_kelvin-documentation:/kelvin
+      - kelvin-documentation-ms:/kelvin
       - kelvin-vscode-ms-config:/home/vscode/.vscode
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/"]
@@ -16,5 +16,5 @@ services:
 
 volumes:
   kelvin-vscode-ms-config:
-  aggk4gggs80wos0gw4g4ckkc_kelvin-documentation:
-    external: true
+  kelvin-documentation-ms:
+
