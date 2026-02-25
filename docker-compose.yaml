@@ -6,8 +6,6 @@ services:
     volumes:
       - kelvin-documentation-ms:/kelvin
       - kelvin-vscode-ms-home:/home/abc
-    ports:
-      - "8001:8000"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:23888/"]
       interval: 30s

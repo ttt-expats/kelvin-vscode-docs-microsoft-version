@@ -22,7 +22,7 @@ RUN curl -Lk 'https://code.visualstudio.com/sha/download?build=stable&os=cli-alp
 RUN pip3 install --break-system-packages kelvin-sdk
 RUN pip3 install --break-system-packages \
     "markdown>=3.8" \
-    "mkdocs>=1.6.1" \
+    "mkdocs==1.6.1" \
     "mkdocs-material>=9.7.0" \
     "mkdocs-material-extensions>=1.3.1" \
     "pymdown-extensions>=10.15" \
@@ -44,5 +44,5 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 WORKDIR /home/abc
-EXPOSE 23888 8001
+EXPOSE 23888
 ENTRYPOINT ["/entrypoint.sh"]
