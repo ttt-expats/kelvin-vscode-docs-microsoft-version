@@ -36,7 +36,8 @@ RUN pip3 install --break-system-packages \
     "Pillow==12.1.1" \
     "python-dotenv==1.0.0"
 
-# Initialise Playwright browsers (chromium only to keep image size down)
+# Let Playwright install its own system dependencies then init chromium
+RUN python3 -m playwright install-deps chromium
 RUN python3 -m Browser.entry init chromium
 
 RUN useradd -m -s /bin/bash vscode
