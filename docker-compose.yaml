@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - kelvin-documentation-ms:/kelvin
-      - kelvin-vscode-ms-config:/home/abc/.vscode
+      - kelvin-vscode-ms-home:/home/abc
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/"]
       interval: 30s
@@ -15,6 +15,6 @@ services:
       - traefik.http.middlewares.authelia@file
 
 volumes:
-  kelvin-vscode-ms-config:
   kelvin-documentation-ms:
+  kelvin-vscode-ms-home:
 
