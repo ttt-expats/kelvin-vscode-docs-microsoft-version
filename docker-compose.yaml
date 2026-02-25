@@ -1,0 +1,20 @@
+services:
+  codeserver-ms:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - kelvin-documentation:/kelvin
+      - kelvin-vscode-ms-config:/home/vscode/.vscode
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    labels:
+      - traefik.http.middlewares.authelia@file
+
+volumes:
+  kelvin-vscode-ms-config:
+  kelvin-documentation:
+    external: true
