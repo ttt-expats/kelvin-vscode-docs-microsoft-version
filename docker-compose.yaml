@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - kelvin-documentation-ms:/kelvin
-      - kelvin-vscode-ms-config:/home/vscode/.vscode
+      - kelvin-vscode-ms-config:/home/abc/.vscode
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/"]
       interval: 30s

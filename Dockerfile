@@ -1,6 +1,5 @@
 FROM ubuntu:24.04
 
-# Install system dependencies + python + gh cli
 RUN apt-get update && apt-get install -y \
     curl \
     libatomic1 \
@@ -11,18 +10,15 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Node.js (required by robotframework-browser)
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
 
-# Download official VS Code CLI
 RUN curl -Lk 'https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-x64' \
     --output /tmp/vscode.tar.gz && \
     tar -xf /tmp/vscode.tar.gz -C /usr/local/bin && \
     rm /tmp/vscode.tar.gz
 
-# Install all pip packages
 RUN pip3 install --break-system-packages kelvin-sdk
 RUN pip3 install --break-system-packages \
     "markdown>=3.8" \
@@ -40,19 +36,13 @@ RUN pip3 install --break-system-packages \
     "Pillow==12.1.1" \
     "python-dotenv==1.0.0"
 
-# Init robotframework-browser (Node.js is now available)
 RUN python3 -m Browser.entry init chromium
 
-RUN useradd -m -s /bin/bash abc && \
-    chown -R abc:abc /home/abc
+RUN useradd -m -s /bin/bash abc
 
-USER abc
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 WORKDIR /home/abc
-
 EXPOSE 8000
-
-CMD ["code", "serve-web", \
-    "--host", "0.0.0.0", \
-    "--port", "8000", \
-    "--without-connection-token", \
-    "--accept-server-license-terms"]
+ENTRYPOINT ["/entrypoint.sh"]
