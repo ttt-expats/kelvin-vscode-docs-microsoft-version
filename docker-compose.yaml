@@ -7,7 +7,7 @@ services:
       - kelvin-documentation-ms:/kelvin
       - kelvin-vscode-ms-home:/home/abc
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      test: ["CMD", "curl", "-f", "http://localhost:23888/"]
       interval: 30s
       timeout: 5s
       retries: 3
