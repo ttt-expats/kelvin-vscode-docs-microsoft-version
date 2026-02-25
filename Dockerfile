@@ -44,5 +44,5 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 WORKDIR /home/abc
-EXPOSE 23888
+EXPOSE 23888 8001
 ENTRYPOINT ["/entrypoint.sh"]
