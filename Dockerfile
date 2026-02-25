@@ -7,9 +7,13 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     python3 \
     python3-pip \
-    python3-venv \
     gh \
     git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Node.js (required by robotframework-browser)
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
 
 # Download official VS Code CLI
@@ -36,8 +40,7 @@ RUN pip3 install --break-system-packages \
     "Pillow==12.1.1" \
     "python-dotenv==1.0.0"
 
-# Let Playwright install its own system dependencies then init chromium
-RUN python3 -m playwright install-deps chromium
+# Init robotframework-browser (Node.js is now available)
 RUN python3 -m Browser.entry init chromium
 
 RUN useradd -m -s /bin/bash vscode
