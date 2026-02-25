@@ -43,9 +43,11 @@ RUN pip3 install --break-system-packages \
 # Init robotframework-browser (Node.js is now available)
 RUN python3 -m Browser.entry init chromium
 
-RUN useradd -m -s /bin/bash vscode
-USER vscode
-WORKDIR /home/vscode
+RUN useradd -m -s /bin/bash abc && \
+    chown -R abc:abc /home/abc
+
+USER abc
+WORKDIR /home/abc
 
 EXPOSE 8000
 
